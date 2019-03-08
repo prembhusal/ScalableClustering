@@ -36,4 +36,7 @@ vi Example.scala
 
 add the following program :
 
+object Example extends App {
+  println("first program")
+}
 
