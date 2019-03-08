@@ -40,3 +40,14 @@ object Example extends App {
   println("first program")
 }
 
+6.Compile and run:
+cd newProject
+
+from command line:
+
+sbt compile
+
+run
+
+
+
