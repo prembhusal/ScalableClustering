@@ -12,15 +12,28 @@ cd newProject
 vi build.sbt
 
 include the scala version and dependencies in  build.sbt file:
+
 eg:
 scalaVersion := "2.11.11"
+
 name := "scalab-clus"
+
 //organization := ""
+
 version := "1.0"
+
 dependencyOverrides += "org.scala-lang" % "scala-compiler" % scalaVersion.value
+
 libraryDependencies += "org.scalatest" % "scalatest_2.11" % "3.0.5" % "test"
 
 
 4.create two folders
 mkdir src/main/scala
 mkdir src/test/scala
+
+5.Inside main/scala folder create main file
+vi Example.scala
+
+add the following program :
+
+
