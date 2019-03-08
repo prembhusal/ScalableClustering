@@ -1,0 +1,5 @@
+package vptree
+
+class VPNode {
+  
+}
