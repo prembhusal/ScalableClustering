@@ -1,5 +1,5 @@
 package vptree
 
-class VPTree {
-  
+object VPTree extends App {
+  println("first program")
 }
