@@ -55,4 +55,54 @@ object vjProcess extends App{
     println("total time :"+ ( t1-t0)/1000)
     
   }
+  
+  def processGidSeq( thres:Double,data:RDD[String]) = {
+    
+    val header = data.first()
+    val t1 = System.currentTimeMillis()
+    val rdd1 = data.filter(row => row != header)
+   
+   val gidMap =  rdd1.map(x => {
+      
+      val str = x.split("\t")
+      val gid = str(0).toInt
+      val seqStr = str(1).replaceAll("\"", "").split(",")
+      val sequence = new Sequence(seqStr(0).toInt, seqStr(1),seqStr(2))
+      (gid,sequence)
+    })
+    var count = rdd1.count
+    //gidMap is  : RDD[(Int, Sequence)] cinnsist of groupId and sequence
+     val localMst = new LocalParMst[Sequence]
+    
+    val groups = gidMap.groupByKey.map( x => {
+      val seq = x._2.toList(0).id
+      if(x._2.size < 1){
+        List(new DendroNode(null, null, x._2.toList(0).id, 0.0))
+        //localMst.cluster(x._2.to[ArrayBuffer] ,4,0,thres)
+       // println("first")
+      }else{
+       // println("group")
+        localMst.cluster(x._2.to[ArrayBuffer] ,4,0,thres)
+      }
+    })
+    
+   val res = groups.collect
+   
+    var labelMap = new  Array[Int](count.toInt)
+    var label = 0
+    
+    res.foreach(x => {
+       for (c <- x) {
+      c.getRecords.foreach(m => labelMap(m) = label)
+      label = label + 1
+    }
+    })
+    /*val bwLabel = new BufferedWriter(new FileWriter(new File("output/gidSeq")))
+    labelMap.foreach( x => bwLabel.write(x+"\n"))
+    bwLabel.close()*/
+    println("count:"+count)
+   val t2 = System.currentTimeMillis()
+   println("total time : "+(t2-t1)/1000)
+    
+  }
 }
