@@ -1,7 +1,6 @@
 
 import org.apache.spark.sql.SparkSession
 object vjProcess extends App{
-  
   def processVJsequences ={
     val t0 = System.currentTimeMillis()
     val spark = SparkSession.builder().master("local").appName("test").getOrCreate()
@@ -78,8 +77,6 @@ object vjProcess extends App{
       val seq = x._2.toList(0).id
       if(x._2.size < 1){
         List(new DendroNode(null, null, x._2.toList(0).id, 0.0))
-        //localMst.cluster(x._2.to[ArrayBuffer] ,4,0,thres)
-       // println("first")
       }else{
        // println("group")
         localMst.cluster(x._2.to[ArrayBuffer] ,4,0,thres)
