@@ -206,3 +206,23 @@ object vjProcess extends App{
     }
        
   }
+object VDJTest extends App {
+  val vdj = new VDJprocess()
+  //vdj.getGroupsClusterParallel(0.13)
+  //vdj.processTop10(0.13)
+  //vdj.usingJoin
+  vjProcess
+  
+  def vjProcess = {
+    /*val spark = SparkSession.builder().appName("parmst").master("local").getOrCreate()
+    val data = "data/gidSeq.tsv"*/
+    val spark = SparkSession.builder().appName("parmst").getOrCreate()
+    var data = args(0)
+    val p = args(1).toInt
+    val outfile = args(2)
+    val sc = spark.sparkContext
+    val rdd = sc.textFile(data,p)
+    vdj.processGidSeq(0.15,rdd,outfile)
+  }
+  
+}
