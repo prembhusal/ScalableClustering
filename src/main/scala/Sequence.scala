@@ -62,3 +62,15 @@ class Sequence (var id:Int, var label:String, var seq:String) extends  Serializa
     seq = obj("seq").str
   }
 }
+
+object SeqTest extends App {
+  val s = new Sequence(-1, "label1", "ACGT")
+  val s1 = new Sequence(-2,"label2", "TTTT")
+ /* val js = s.toJSON
+  println(ujson.write(js))
+
+  val s1 = s.fromJSON(js)
+  println(s1)*/
+  
+  println(s.distance(s1))
+}
