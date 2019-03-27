@@ -46,4 +46,19 @@ class Sequence (var id:Int, var label:String, var seq:String) extends  Serializa
     
     costs(n)
   }
+  private def hamming(s:Sequence): Double = {
+    //normalized hamming distance with length
+    if (seq.length != s.seq.length) throw new IllegalArgumentException()
+    seq.zip(s.seq).count(pair => pair._1 != pair._2)/s.seq.length.toDouble
+  }
+
+  def toJSON:Js.Obj = Js.Obj("id" -> Js.Num(id),
+      "label" -> Js.Str(label),
+      "seq" -> Js.Str(seq))
+  
+  def fromJSON(obj:Js.Obj): Unit = {
+    id = obj("id").num.toInt
+    label = obj("label").str
+    seq = obj("seq").str
+  }
 }
