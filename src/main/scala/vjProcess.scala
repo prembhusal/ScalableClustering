@@ -94,9 +94,7 @@ object vjProcess extends App{
       label = label + 1
     }
     })
-    /*val bwLabel = new BufferedWriter(new FileWriter(new File("output/gidSeq")))
-    labelMap.foreach( x => bwLabel.write(x+"\n"))
-    bwLabel.close()*/
+    
     println("count:"+count)
    val t2 = System.currentTimeMillis()
    println("total time : "+(t2-t1)/1000)
