@@ -32,3 +32,8 @@ def clustSmall( records: ArrayBuffer[Sequence], thres:Double) :List[Cluster] = {
      } 
      return clusters
    }
+
+
+object testClus extends App {
+     
+}
